@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>reveal.js - The HTML Presentation Framework</title>
+		<title>Code Carrots JS - jQuery</title>
 
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 		<meta name="author" content="Hakim El Hattab">
@@ -50,13 +50,223 @@
 			<div class="slides">
 				<section>
 					<h1>Code Carrots</h1>
-					<h3>Zajęcia z programowania w języku JavaScript</h3>
+					<h3>jQuery</h3>
 					<p>
-						<small>Ogranizatorka zajęć: <a target="_blank" href="mailto:zuzapodwinska@gmail.com">Zuza Podwińska</a></small>
+						<small>Prowadzący: <a target="_blank" href="mailto:michal.matulka@protonmail.ch">Michał Matulka</a></small>
 					</p>
 				</section>
+				<section>
+					<h2>Co to takiego jQuery?</h2>
+				</section>
+				<section>
+					<h2>Selektory</h2>
+					<pre><code contenteditable="true" class="javascript">
+$('#mojeId');
+$('.mojaKlasa');
+$('div.mojaKlasa p');
+					</code></pre>
+				</section>
+				<section>
+					<h2>Nawigacja po drzewie DOM</h2>
+					<pre><code contenteditable="true" class="javascript">
+$('div.mojaKlasa').last();
+$('h1#mainTitle').parent();
+$('body').children();
+$('button#myButton').closest('div');
+$('#menu li').first().next();
+					</code></pre>
+				</section>
+				<section>
+					<h2>Operacje na drzewie DOM</h2>
+					<pre><code contenteditable="true" class="javascript">
+$('<div style="width: 100px; height: 100px; background: #ff0000">Witaj świecie!</div>').appendTo('body');
+					</code></pre>
+				</section>
+				<section>
+					<h2>Wsparcie css</h2>
+					<pre><code contenteditable="true" class="javascript">
+$('#mojElement').css({
+	background: '#123456',
+	float: 'left'
+});
+					</code></pre>
+				</section>
+				<section>
+					<h2>Zdarzenia</h2>
+					<pre><code contenteditable="true" class="javascript">
+$('button.option').on('click', function (e) {
+	console.log('yay!');
+});
+					</code></pre>
+				</section>
+				<section>
+					<h2>Ajax</h2>
+					<pre><code contenteditable="true" class="javascript">
+$.ajax({ url: '/mojUrl', success: function (data) { console.log(data); } });
+					</code></pre>
+				</section>
+				<section>
+					<h2>Efekty graficzne</h2>
+					<pre><code contenteditable="true" class="javascript">
+$('#mojElement').hide();
+$('#mojElemen').show();
+$('#mojElemen').toggle();
+$('#mojElemen').toggle();
+					</code></pre>
+				</section>
+				<section>
+					<h2>jQuery UI!</h2>
+				</section>
+				<section>
+					<h2>Wtyczki!</h2>
+				</section>
+				<section>
+					<h2>Trochę konkretów</h2>
+				</section>
+				<section>
+					<h2>Magiczny '$'</h2>
+					<h3>"Alias" dla jQuery</h3>
+				</section>
+				<section>
+					<h2>$ jest funkcją</h2>
+					<pre><code contenteditable="true" class="javascript">
+var wrappedDivs = $('div');
+var element = document.getElementById('mojeId');
+var wrappedElement = $(element);
+var newWrappedParagraph = $('<p></p>');
+					</code></pre>
+				</section>
+				<section>
+					<h2>$ jest obiektem</h2>
+					<pre><code contenteditable="true" class="javascript">
+$.ajax({
+    url: '/ajaxEndpoint',
+    success: function (data) {
+        console.log(data);
+    }
+});
+					</code></pre>
+				</section>
+				<section>
+					<h2>"Otaczanie" elementów</h2>
+					<pre><code contenteditable="true" class="javascript">
+var wrapppedDiv = $('#myDiv');
+wrappedDiv.hide(1000);
+document.getElementById('myDiv').hide(1000); //ERROR XOXOXO
+					</code></pre>
+				</section>
+				<section>
+					<h2>Kolekcja elementów</h2>
+					<pre><code contenteditable="true" class="javascript">
+$('img').css({'border': '10px solid #987654'});
+					</code></pre>
+				</section>
+				<section>
+					<h2>Zadanie 1</h2>
+					<p>
+						W załączonym kodzie po kliknięciu w przycisk zmień kolor czcionki dla wszystkich akapitów w tekście:
+						<p>pierwsze kliknięcie: czerwony</p>
+						<p>drugie kliknięcie: zielony</p>
+						<p>trzecie kliknięcie: niebieski</p>
+						<p>czwarte kliknięcie: czerwony</p>
+						<p>piąte kliknięcie: zielony</p>
+						<p>etc...</p>
+					</p>
+				</section>
+				<section>
+					<h2>Kolekcja jako tablica</h2>
+					<pre><code contenteditable="true" class="javascript">
+console.log($('p')[0]);
+console.log($('p')[1]);
+					</code></pre>
+					<p>Przy takim dostępie otrzymamy elementy DOM "nieopakowane" w obiekty jQuery!</p>
+				</section>
+				<section>
+					<h2>Prosta iteracja po kolekcji elementów</h2>
+					<pre><code contenteditable="true" class="javascript">
+$('p').each(function () {
+    console.log(this); //"Nieopakowany" obiekt DOM
+    console.log($(this)); //"Opakowany" obiekt DOM
+});
+					</code></pre>
+				</section>
+				<section>
+					<h2>Zadanie 2</h2>
+					<p>
+						W załączonym kodzie po kliknięciu w przycisk zmień kolor czcionki dla wszystkich akapitów w tekście:
+						<p>pierwsze kliknięcie: 1 czerwony 2 zielony 3 niebieski</p>
+						<p>drugie kliknięcie: 1 zielony 2 niebieski 3 czerwony</p>
+						<p>trzecie kliknięcie: 1 niebieski 2 czerwony 3 zielony</p>
+					</p>
+				</section>
+				<section>
+					<h2>Tworzenie elementów DOM na podstawie kodu HTML</h2>
+					<pre><code contenteditable="true" class="javascript">
+var newDiv = $('<div style="width: 100px; height: 100px; background: #ff0000">Witaj świecie!</div>');
+newDiv.appendTo('body');
+					</code></pre>
+				</section>
+				<section>
+					<h2>Zadanie 3</h2>
+					<p>
+Po kliknięciu w przycisk dodaj do dokumentu następującą strukturę html
+						<pre><code contenteditable="true" class="html">
+<div>
+    <div style="float: left; margin-right: 5px;">Jak</div>
+    <div style="float: left; margin-right: 5px;">żyć</div>
+    <div style="float: left; margin-right: 5px;">panie</div>
+    <div style="float: left;">premierze?</div>
+</div>
+						</code></pre>
+					</p>
+				</section>
+				<section>
+					<h2>Zdarzenia</h2>
+					<pre><code contenteditable="true" class="javascript">
+$('button#myButton').on('click', function (e) {
+    console.log('klikłem!');
+});
+					</code></pre>
+				</section>
+				<section>
+					<h2>Zadanie 4</h2>
+					<p>
+						Wywołując tylko raz funkcję .on() wyświetl komunikat typu alert po kliknięciu na dowolną pozycję w menu.
+					</p>
+				</section>
+				<section>
+					<h2>This w zdarzeniach</h2>
+					<pre><code contenteditable="true" class="javascript">
+$('#menu button').on('click', function (e) {
+    console.log(this);
+});
+					</code></pre>
+				</section>
+				<section>
+					<h2>Efekty animowane</h2>
+					<pre><code contenteditable="true" class="javascript">
+$('p').first().hide(1000);
+					</code></pre>
+				</section>
+				<section>
+					<h2>Zadanie 5</h2>
+					<p>
+						Napisz kod, który po kliknięciu na dowolną pozycję w menu schowa ją.
+					</p>
+				</section>
+				<section>
+					<h2>Cel zdarzenia</h2>
+					<pre><code contenteditable="true" class="javascript">
+$('#menu').on('click', function (e) { console.log(e.target); });
+					</code></pre>
+				</section>
+				<section>
+					<h2>Propagacja zdarzeń (bubbling - "bąbelkowanie")</h2>
+					<pre><code contenteditable="true" class="javascript">
+$('#menu li').last().on('click', function (e) { console.log('ostatni'); });
+					</code></pre>
+				</section>
 			</div>
-
 		</div>
 
 		<script src="src/reveal.js/lib/js/head.min.js"></script>
